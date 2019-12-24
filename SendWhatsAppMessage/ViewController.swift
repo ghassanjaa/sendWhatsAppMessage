@@ -10,11 +10,22 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
+      override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-    }
+    }//END
+    
+    @IBAction func sendToWhatsApp(_ sender: Any) {
+        let textEntry: String = "YourMessage"
+        let data: String = textEntry.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let number: String = "YourNumber"
+        let url = URL(string: "whatsapp://send?phone=\(number)&text=\(data)")
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url!)
+        }
+    }//END
 
-
-}
+}//END Class
 
